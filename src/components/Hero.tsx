@@ -48,7 +48,7 @@ export default function Hero() {
 
       {/* ── Center: Main Title ── */}
       <div className="relative z-10 flex flex-col items-center text-center">
-        <h1 className="text-[clamp(3rem,12vw,10rem)] font-bold leading-[0.85] tracking-tighter text-accent">
+        <h1 className="text-[clamp(3rem,12vw,10rem)] font-bold leading-[0.85] tracking-[-0.06em] text-accent" style={{ fontFamily: "var(--font-display)" }}>
           <div>
             <SplitText text="AMER" delay={0.3} />
           </div>

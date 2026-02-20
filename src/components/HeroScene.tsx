@@ -10,14 +10,14 @@ import { useTheme } from "./ThemeProvider";
 function DustField({ isDark }: { isDark: boolean }) {
   const ref = useRef<THREE.Points>(null);
   const { pointer } = useThree();
-  const count = 600;
+  const count = 1500;
 
   const basePositions = useMemo(() => {
     const p = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      p[i * 3] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      p[i * 3] = (Math.random() - 0.5) * 24;
+      p[i * 3 + 1] = (Math.random() - 0.5) * 24;
+      p[i * 3 + 2] = (Math.random() - 0.5) * 24;
     }
     return p;
   }, []);
@@ -82,11 +82,12 @@ function WireframeLayer({ geo, scale, speedX, speedY, isDark, opacity }: {
   opacity: number;
 }) {
   const ref = useRef<THREE.Mesh>(null);
+  const { pointer } = useThree();
 
   useFrame((state) => {
     if (!ref.current) return;
-    ref.current.rotation.x = state.clock.elapsedTime * speedX;
-    ref.current.rotation.y = state.clock.elapsedTime * speedY;
+    ref.current.rotation.x = state.clock.elapsedTime * speedX + pointer.y * 0.3;
+    ref.current.rotation.y = state.clock.elapsedTime * speedY + pointer.x * 0.3;
   });
 
   const Geometry = () => {
