@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #050505;
+  --color-surface: #0a0a0a;
+  --color-accent: #e0e0e0;
+  --color-muted: #555555;
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+}
+
+* {
+  cursor: none;
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+body {
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
