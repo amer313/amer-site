@@ -12,7 +12,7 @@ export default function About() {
 
       <ScrollReveal delay={0.1}>
         <p className="text-2xl md:text-3xl text-accent/80 mt-8">
-          I build products that feel alive. Full-stack developer obsessed with craft, performance, and the details that make software feel <span className="italic text-white">right</span>.
+          I build products that feel alive. Full-stack developer obsessed with craft, performance, and the details that make software feel <span className="italic text-accent font-semibold">right</span>.
         </p>
       </ScrollReveal>
 
@@ -24,7 +24,7 @@ export default function About() {
               {["TypeScript", "React", "Next.js", "Node.js", "Python", "Go", "PostgreSQL", "AWS"].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full border border-white/10 px-3 py-1 text-sm text-accent/70"
+                  className="rounded-full border border-[var(--border)] px-3 py-1 text-sm text-accent/70"
                 >
                   {tech}
                 </span>

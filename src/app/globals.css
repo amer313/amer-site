@@ -1,31 +1,77 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #050505;
-  --color-surface: #0a0a0a;
-  --color-accent: #e0e0e0;
-  --color-muted: #555555;
+  --color-bg: var(--bg);
+  --color-surface: var(--srf);
+  --color-accent: var(--acc);
+  --color-muted: var(--mut);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains);
+}
+
+/* Dark theme (default) */
+:root {
+  --bg: #050505;
+  --srf: #0a0a0a;
+  --acc: #e0e0e0;
+  --mut: #555555;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.25);
+  --selection-bg: rgba(255, 255, 255, 0.15);
+  --selection-color: white;
+  --noise-opacity: 0.03;
+  --cursor-color: white;
+  --cursor-border: rgba(255, 255, 255, 0.4);
+  --cursor-border-hover: rgba(255, 255, 255, 0.8);
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg: #f5f5f0;
+  --srf: #eaeae5;
+  --acc: #1a1a1a;
+  --mut: #888888;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.3);
+  --selection-bg: rgba(0, 0, 0, 0.12);
+  --selection-color: black;
+  --noise-opacity: 0.02;
+  --cursor-color: #1a1a1a;
+  --cursor-border: rgba(0, 0, 0, 0.3);
+  --cursor-border-hover: rgba(0, 0, 0, 0.7);
 }
 
 * {
   cursor: none;
 }
 
-html {
-  background: var(--color-bg);
-  color: var(--color-accent);
+html,
+body {
+  background: var(--bg);
+  color: var(--acc);
+  transition: background 0.6s ease, color 0.6s ease;
 }
 
 body {
-  background: var(--color-bg);
   overflow-x: hidden;
 }
 
+/* Smooth transitions for theme switch */
+*,
+*::before,
+*::after {
+  transition: background-color 0.6s ease, border-color 0.6s ease, color 0.4s ease;
+}
+
+/* Opt out of transition for animations */
+[data-no-transition],
+[data-no-transition] *  {
+  transition: none !important;
+}
+
 ::selection {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
+  background: var(--selection-bg);
+  color: var(--selection-color);
 }
 
 html.lenis,

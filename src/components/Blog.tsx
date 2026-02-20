@@ -39,14 +39,14 @@ export default function Blog() {
             <ScrollReveal key={i} delay={i * 0.1}>
               <a
                 href="#"
-                className="group relative block border-t border-white/5 py-8"
+                className="group relative block border-t border-[var(--border)] py-8"
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 data-cursor="pointer"
               >
                 <div className="flex items-start justify-between gap-8">
                   <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-medium text-accent/80 group-hover:text-white transition-colors duration-300">
+                    <h3 className="text-xl md:text-2xl font-medium text-accent/80 group-hover:text-accent transition-colors duration-300">
                       {post.title}
                     </h3>
                     <AnimatePresence>
@@ -69,7 +69,7 @@ export default function Blog() {
                 </div>
 
                 <motion.div
-                  className="absolute bottom-0 left-0 h-px bg-white/20"
+                  className="absolute bottom-0 left-0 h-px bg-accent/20"
                   initial={{ width: "0%" }}
                   animate={{ width: hoveredIndex === i ? "100%" : "0%" }}
                   transition={{ duration: 0.3 }}

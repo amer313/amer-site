@@ -42,7 +42,7 @@ export default function BentoCard({ children, className = "" }: BentoCardProps) 
   return (
     <motion.div
       ref={cardRef}
-      className={`rounded-2xl border border-white/5 bg-surface p-6 hover:border-white/10 transition-colors ${className}`}
+      className={`rounded-2xl border border-[var(--border)] bg-surface p-6 hover:border-[var(--border-hover)] transition-colors ${className}`}
       style={{
         rotateX,
         rotateY,

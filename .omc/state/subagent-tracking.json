@@ -1,7 +1,81 @@
 {
-  "agents": [],
-  "total_spawned": 0,
-  "total_completed": 0,
+  "agents": [
+    {
+      "agent_id": "aba87f2",
+      "agent_type": "worker-hero",
+      "started_at": "2026-02-20T04:34:40.339Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-20T04:35:15.138Z",
+      "duration_ms": 34799
+    },
+    {
+      "agent_id": "ae37d65",
+      "agent_type": "worker-projects",
+      "started_at": "2026-02-20T04:34:40.442Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-20T04:35:26.110Z",
+      "duration_ms": 45668
+    },
+    {
+      "agent_id": "a978087",
+      "agent_type": "worker-about",
+      "started_at": "2026-02-20T04:34:40.556Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-20T04:35:27.153Z",
+      "duration_ms": 46597
+    },
+    {
+      "agent_id": "a2a72ae",
+      "agent_type": "worker-blog-contact",
+      "started_at": "2026-02-20T04:34:40.593Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-20T04:35:35.874Z",
+      "duration_ms": 55281
+    },
+    {
+      "agent_id": "a2462b9",
+      "agent_type": "worker-hero",
+      "started_at": "2026-02-20T04:35:15.410Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-20T04:35:18.608Z",
+      "duration_ms": 3198
+    },
+    {
+      "agent_id": "a40a39f",
+      "agent_type": "worker-hero",
+      "started_at": "2026-02-20T04:35:25.658Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "ab40572",
+      "agent_type": "worker-projects",
+      "started_at": "2026-02-20T04:35:26.380Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "a475eda",
+      "agent_type": "worker-about",
+      "started_at": "2026-02-20T04:35:27.371Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "a5a5215",
+      "agent_type": "worker-blog-contact",
+      "started_at": "2026-02-20T04:35:36.089Z",
+      "parent_mode": "none",
+      "status": "running"
+    }
+  ],
+  "total_spawned": 7,
+  "total_completed": 5,
   "total_failed": 0,
-  "last_updated": "2026-02-20T04:30:12.680Z"
+  "last_updated": "2026-02-20T04:36:22.305Z"
 }

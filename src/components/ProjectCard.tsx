@@ -27,7 +27,7 @@ export default function ProjectCard({
         transition={{ duration: 0.3 }}
         data-cursor="pointer"
       >
-        <div className="relative aspect-[16/10] rounded-xl border border-white/5 overflow-hidden mb-4">
+        <div className="relative aspect-[16/10] rounded-xl border border-[var(--border)] overflow-hidden mb-4">
           <div
             className="absolute inset-0 flex items-center justify-center"
             style={{
@@ -38,7 +38,7 @@ export default function ProjectCard({
           </div>
           <div className="absolute inset-0 bg-white/5 mix-blend-overlay backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        <h3 className="text-lg font-medium mb-2 group-hover:text-white transition-colors duration-300">
+        <h3 className="text-lg font-medium mb-2 group-hover:text-accent transition-colors duration-300">
           {title}
         </h3>
         <p className="text-sm text-muted mb-3">{description}</p>
@@ -46,7 +46,7 @@ export default function ProjectCard({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-white/10 px-2 py-0.5 text-xs text-muted"
+              className="rounded-full border border-[var(--border)] px-2 py-0.5 text-xs text-muted"
             >
               {tag}
             </span>

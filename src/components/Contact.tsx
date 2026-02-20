@@ -38,10 +38,10 @@ export default function Contact() {
                 <MagneticWrap key={link.name} strength={0.4}>
                   <a
                     href={link.href}
-                    className="group relative rounded-full border border-white/10 px-6 py-3 text-sm text-accent/80 transition-colors duration-300 hover:border-white/30 hover:text-white"
+                    className="group relative rounded-full border border-[var(--border)] px-6 py-3 text-sm text-accent/80 transition-colors duration-300 hover:border-[var(--border-hover)] hover:text-accent"
                     data-cursor="pointer"
                   >
-                    <div className="absolute inset-0 -z-10 rounded-full bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-0 -z-10 rounded-full bg-accent/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     {link.name}
                   </a>
                 </MagneticWrap>
@@ -49,7 +49,7 @@ export default function Contact() {
             </div>
           </ScrollReveal>
 
-          <div className="mt-32 border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between gap-4 text-sm text-muted">
+          <div className="mt-32 border-t border-[var(--border)] pt-8 flex flex-col sm:flex-row justify-between gap-4 text-sm text-muted">
             <p>© {currentYear} Amer Abbadi</p>
             <p>Built with obsessive attention to detail.</p>
           </div>

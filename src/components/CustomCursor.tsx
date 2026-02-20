@@ -50,7 +50,8 @@ export default function CustomCursor() {
     <>
       {/* Dot */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[999] rounded-full bg-white"
+        className="pointer-events-none fixed left-0 top-0 z-[999] rounded-full"
+        data-no-transition
         style={{
           x: cursorX,
           y: cursorY,
@@ -58,23 +59,23 @@ export default function CustomCursor() {
           height: 6,
           translateX: "-50%",
           translateY: "-50%",
+          backgroundColor: "var(--cursor-color)",
         }}
       />
       {/* Ring */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[998] rounded-full border border-white/40"
+        className="pointer-events-none fixed left-0 top-0 z-[998] rounded-full border"
+        data-no-transition
         style={{
           x: smoothX,
           y: smoothY,
           translateX: "-50%",
           translateY: "-50%",
+          borderColor: isHovering ? "var(--cursor-border-hover)" : "var(--cursor-border)",
         }}
         animate={{
           width: isHovering ? 56 : 36,
           height: isHovering ? 56 : 36,
-          borderColor: isHovering
-            ? "rgba(255,255,255,0.8)"
-            : "rgba(255,255,255,0.4)",
         }}
         transition={{ duration: 0.2 }}
       />
