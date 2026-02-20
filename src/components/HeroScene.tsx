@@ -63,9 +63,9 @@ function DustField({ isDark }: { isDark: boolean }) {
       </bufferGeometry>
       <pointsMaterial
         color={isDark ? "#ffffff" : "#333333"}
-        size={0.012}
+        size={0.025}
         transparent
-        opacity={isDark ? 0.4 : 0.25}
+        opacity={isDark ? 0.7 : 0.4}
         sizeAttenuation
       />
     </points>
@@ -181,7 +181,7 @@ function MorphCore({ isDark }: { isDark: boolean }) {
 
   return (
     <Float speed={1} rotationIntensity={0.15} floatIntensity={0.2}>
-      <mesh ref={ref} scale={1.1}>
+      <mesh ref={ref} scale={1.8}>
         <icosahedronGeometry args={[1, 8]} />
         <MeshDistortMaterial
           color={isDark ? "#ffffff" : "#111111"}
@@ -272,10 +272,9 @@ function Scene({ isDark }: { isDark: boolean }) {
       <DustField isDark={isDark} />
 
       {/* Multiple nested wireframe cages */}
-      <WireframeLayer geo="icosahedron" scale={3.5} speedX={0.04} speedY={0.06} isDark={isDark} opacity={0.07} />
-      <WireframeLayer geo="dodecahedron" scale={2.8} speedX={-0.03} speedY={0.05} isDark={isDark} opacity={0.06} />
-      <WireframeLayer geo="octahedron" scale={4.2} speedX={0.02} speedY={-0.03} isDark={isDark} opacity={0.05} />
-      <WireframeLayer geo="icosahedron" scale={5.0} speedX={-0.015} speedY={0.02} isDark={isDark} opacity={0.035} />
+      <WireframeLayer geo="icosahedron" scale={2.2} speedX={0.04} speedY={0.06} isDark={isDark} opacity={0.08} />
+      <WireframeLayer geo="dodecahedron" scale={1.8} speedX={-0.03} speedY={0.05} isDark={isDark} opacity={0.07} />
+      <WireframeLayer geo="octahedron" scale={2.8} speedX={0.02} speedY={-0.03} isDark={isDark} opacity={0.05} />
 
       <MorphCore isDark={isDark} />
       <ConnectionLines isDark={isDark} />
