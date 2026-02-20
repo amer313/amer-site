@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
 import CustomCursor from "@/components/CustomCursor";
+import CursorGates from "@/components/CursorGates";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body className="bg-bg font-sans antialiased">
         <ThemeProvider>
           <CustomCursor />
+          <CursorGates />
           <ThemeToggle />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
