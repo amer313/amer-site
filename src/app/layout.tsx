@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
-import NoiseOverlay from "@/components/NoiseOverlay";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -33,7 +32,6 @@ export default function RootLayout({
         <ThemeProvider>
           <CustomCursor />
           <ThemeToggle />
-          <NoiseOverlay />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
       </body>
