@@ -57,13 +57,14 @@ function DustField({ isDark }: { isDark: boolean }) {
 }
 
 /* ── Reactive Wireframe — lines split open near cursor ── */
-function ReactiveWireframe({ geo, baseScale, speedX, speedY, isDark, opacity }: {
+function ReactiveWireframe({ geo, baseScale, speedX, speedY, isDark, opacity, color }: {
   geo: "icosahedron" | "octahedron" | "dodecahedron";
   baseScale: number;
   speedX: number;
   speedY: number;
   isDark: boolean;
   opacity: number;
+  color?: string;
 }) {
   const lineRef = useRef<THREE.LineSegments>(null);
   const groupRef = useRef<THREE.Group>(null);
@@ -138,7 +139,7 @@ function ReactiveWireframe({ geo, baseScale, speedX, speedY, isDark, opacity }: 
           <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         </bufferGeometry>
         <lineBasicMaterial
-          color={isDark ? "#ffffff" : "#000000"}
+          color={color || (isDark ? "#ffffff" : "#000000")}
           transparent
           opacity={opacity}
         />
@@ -165,7 +166,7 @@ function MorphCore({ isDark }: { isDark: boolean }) {
       <mesh ref={ref} scale={0.8}>
         <icosahedronGeometry args={[1, 8]} />
         <MeshDistortMaterial
-          color={isDark ? "#ffffff" : "#111111"}
+          color={isDark ? "#ff2244" : "#cc1133"}
           roughness={0.15}
           metalness={0.95}
           distort={0.2}
@@ -255,9 +256,9 @@ function Scene({ isDark }: { isDark: boolean }) {
       <DustField isDark={isDark} />
 
       {/* Reactive wireframes — lines split open near cursor */}
-      <ReactiveWireframe geo="icosahedron" baseScale={2.2} speedX={0.04} speedY={0.06} isDark={isDark} opacity={isDark ? 0.12 : 0.08} />
-      <ReactiveWireframe geo="dodecahedron" baseScale={1.8} speedX={-0.03} speedY={0.05} isDark={isDark} opacity={isDark ? 0.1 : 0.07} />
-      <ReactiveWireframe geo="octahedron" baseScale={2.8} speedX={0.02} speedY={-0.03} isDark={isDark} opacity={isDark ? 0.08 : 0.05} />
+      <ReactiveWireframe geo="icosahedron" baseScale={2.2} speedX={0.04} speedY={0.06} isDark={isDark} opacity={isDark ? 0.2 : 0.12} color="#ff2244" />
+      <ReactiveWireframe geo="dodecahedron" baseScale={1.8} speedX={-0.03} speedY={0.05} isDark={isDark} opacity={isDark ? 0.16 : 0.1} color="#ff3355" />
+      <ReactiveWireframe geo="octahedron" baseScale={2.8} speedX={0.02} speedY={-0.03} isDark={isDark} opacity={isDark ? 0.12 : 0.07} color="#cc1133" />
 
       <MorphCore isDark={isDark} />
 
