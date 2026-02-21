@@ -256,9 +256,9 @@ function Scene({ isDark }: { isDark: boolean }) {
       <DustField isDark={isDark} />
 
       {/* Reactive wireframes — lines split open near cursor */}
-      <ReactiveWireframe geo="icosahedron" baseScale={2.2} speedX={0.04} speedY={0.06} isDark={isDark} opacity={isDark ? 0.2 : 0.12} color="#ff2244" />
-      <ReactiveWireframe geo="dodecahedron" baseScale={1.8} speedX={-0.03} speedY={0.05} isDark={isDark} opacity={isDark ? 0.16 : 0.1} color="#ff3355" />
-      <ReactiveWireframe geo="octahedron" baseScale={2.8} speedX={0.02} speedY={-0.03} isDark={isDark} opacity={isDark ? 0.12 : 0.07} color="#cc1133" />
+      <ReactiveWireframe geo="icosahedron" baseScale={2.2} speedX={0.04} speedY={0.06} isDark={isDark} opacity={isDark ? 0.2 : 0.25} color={isDark ? "#ff2244" : "#cc0022"} />
+      <ReactiveWireframe geo="dodecahedron" baseScale={1.8} speedX={-0.03} speedY={0.05} isDark={isDark} opacity={isDark ? 0.16 : 0.2} color={isDark ? "#ff3355" : "#bb1133"} />
+      <ReactiveWireframe geo="octahedron" baseScale={2.8} speedX={0.02} speedY={-0.03} isDark={isDark} opacity={isDark ? 0.12 : 0.15} color={isDark ? "#cc1133" : "#990022"} />
 
       <MorphCore isDark={isDark} />
 
