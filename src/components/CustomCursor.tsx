@@ -9,9 +9,12 @@ export default function CustomCursor() {
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
 
-  const trailConfig = { damping: 30, stiffness: 200, mass: 0.6 };
-  const shadowX = useSpring(cursorX, trailConfig);
-  const shadowY = useSpring(cursorY, trailConfig);
+  const mid = { damping: 22, stiffness: 300, mass: 0.4 };
+  const outer = { damping: 28, stiffness: 180, mass: 0.7 };
+  const midX = useSpring(cursorX, mid);
+  const midY = useSpring(cursorY, mid);
+  const outerX = useSpring(cursorX, outer);
+  const outerY = useSpring(cursorY, outer);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -54,35 +57,57 @@ export default function CustomCursor() {
     };
   }, [handleMouseMove]);
 
-  const size = isPressed ? 14 : isHovering ? 32 : 22;
+  const innerSize = isPressed ? 10 : isHovering ? 18 : 14;
+  const midSize = isPressed ? 18 : isHovering ? 32 : 24;
+  const outerSize = isPressed ? 26 : isHovering ? 48 : 36;
 
   return (
     <>
-      {/* Shadow triangle — lagging behind, blurred */}
+      {/* Outer triangle — slowest, largest */}
       <motion.div
         className="pointer-events-none fixed left-0 top-0 z-[997] mix-blend-difference"
         data-no-transition
         style={{
-          x: shadowX,
-          y: shadowY,
+          x: outerX,
+          y: outerY,
           translateX: "-50%",
           translateY: "-50%",
-          filter: "blur(4px)",
         }}
         animate={{
-          width: size * 1.6,
-          height: size * 1.6,
-          rotate: isHovering ? 180 : 0,
-          opacity: 0.3,
+          width: outerSize,
+          height: outerSize,
+          rotate: isPressed ? 120 : isHovering ? 240 : 0,
         }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
+        transition={{ type: "spring", damping: 28, stiffness: 180 }}
       >
-        <svg viewBox="0 0 24 24" fill="white" className="h-full w-full">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1" className="h-full w-full opacity-40">
           <polygon points="12,2 22,20 2,20" />
         </svg>
       </motion.div>
 
-      {/* Main triangle cursor */}
+      {/* Middle triangle — medium speed */}
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[998] mix-blend-difference"
+        data-no-transition
+        style={{
+          x: midX,
+          y: midY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          width: midSize,
+          height: midSize,
+          rotate: isPressed ? 60 : isHovering ? 180 : 0,
+        }}
+        transition={{ type: "spring", damping: 22, stiffness: 300 }}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="h-full w-full opacity-70">
+          <polygon points="12,2 22,20 2,20" />
+        </svg>
+      </motion.div>
+
+      {/* Inner triangle — fastest, smallest, solid */}
       <motion.div
         className="pointer-events-none fixed left-0 top-0 z-[999] mix-blend-difference"
         data-no-transition
@@ -93,11 +118,11 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          width: size,
-          height: size,
-          rotate: isPressed ? 60 : isHovering ? 180 : 0,
+          width: innerSize,
+          height: innerSize,
+          rotate: isPressed ? 30 : isHovering ? 60 : 0,
         }}
-        transition={{ type: "spring", damping: 22, stiffness: 400 }}
+        transition={{ type: "spring", damping: 18, stiffness: 400 }}
       >
         <svg viewBox="0 0 24 24" fill="white" className="h-full w-full">
           <polygon points="12,2 22,20 2,20" />
