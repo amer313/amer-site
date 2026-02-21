@@ -163,13 +163,13 @@ function MorphCore({ isDark }: { isDark: boolean }) {
 
   return (
     <Float speed={1} rotationIntensity={0.15} floatIntensity={0.2}>
-      <mesh ref={ref} scale={0.8}>
+      <mesh ref={ref} scale={1.3}>
         <icosahedronGeometry args={[1, 8]} />
         <MeshDistortMaterial
-          color={isDark ? "#ff2244" : "#cc1133"}
-          roughness={0.15}
-          metalness={0.95}
-          distort={0.2}
+          color={isDark ? "#ff3355" : "#cc1133"}
+          roughness={0.1}
+          metalness={0.9}
+          distort={0.25}
           speed={1.5}
           wireframe
         />
@@ -252,6 +252,7 @@ function Scene({ isDark }: { isDark: boolean }) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} />
       <pointLight position={[-3, 2, 4]} intensity={0.4} />
+      <pointLight position={[0, 0, 2]} intensity={1.2} color="#ff2244" distance={6} />
 
       <DustField isDark={isDark} />
 
