@@ -6,6 +6,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import CustomCursor from "@/components/CustomCursor";
 import CursorGates from "@/components/CursorGates";
 import SmoothScroll from "@/components/SmoothScroll";
+import Nav from "@/components/Nav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,8 +24,25 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Amer Abbadi",
-  description: "Developer. Builder. Creator.",
+  title: "Amer Abbadi — Full-Stack Developer",
+  description: "Full-stack developer based in Northern Virginia. Building products with Next.js, React, and AI.",
+  metadataBase: new URL("https://amerabbadi.com"),
+  openGraph: {
+    title: "Amer Abbadi — Full-Stack Developer",
+    description: "Full-stack developer based in Northern Virginia. Building products with Next.js, React, and AI.",
+    url: "https://amerabbadi.com",
+    siteName: "Amer Abbadi",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Amer Abbadi — Full-Stack Developer",
+    description: "Full-stack developer based in Northern Virginia. Building products with Next.js, React, and AI.",
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -39,6 +57,7 @@ export default function RootLayout({
           <CustomCursor />
           <CursorGates />
           <ThemeToggle />
+          <Nav />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
       </body>

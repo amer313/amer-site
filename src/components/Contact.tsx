@@ -17,7 +17,7 @@ export default function Contact() {
     <>
       <Marquee text="LET'S WORK TOGETHER" className="mb-20" />
 
-      <section className="px-6 md:px-12 lg:px-24">
+      <section id="contact" className="px-6 md:px-12 lg:px-24">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <p className="text-base uppercase tracking-wider text-muted mb-8">

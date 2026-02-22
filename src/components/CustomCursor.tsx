@@ -24,7 +24,15 @@ export default function CustomCursor() {
     [cursorX, cursorY]
   );
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
   useEffect(() => {
+    setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (isTouchDevice) return;
+
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
@@ -55,7 +63,9 @@ export default function CustomCursor() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [handleMouseMove]);
+  }, [handleMouseMove, isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   const innerSize = isPressed ? 10 : isHovering ? 18 : 14;
   const midSize = isPressed ? 18 : isHovering ? 32 : 24;

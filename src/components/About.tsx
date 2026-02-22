@@ -5,14 +5,20 @@ import BentoCard from "@/components/BentoCard";
 
 export default function About() {
   return (
-    <section className="px-6 py-32 md:px-12 lg:px-24 max-w-5xl mx-auto">
+    <section id="about" className="px-6 py-32 md:px-12 lg:px-24 max-w-5xl mx-auto">
       <ScrollReveal>
         <p className="text-base uppercase tracking-widest text-muted">About</p>
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>
         <p className="text-2xl md:text-3xl text-accent/80 mt-8">
-          I build products that feel alive. Full-stack developer obsessed with craft, performance, and the details that make software feel <span className="italic text-accent font-semibold">right</span>.
+          Full-stack developer based in Northern Virginia. GMU grad. I like building things that feel polished and shipping them fast — currently working on <span className="italic text-accent font-semibold">LectureAI</span>.
+        </p>
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.15}>
+        <p className="text-lg text-muted mt-4">
+          When I'm not coding, I'm on the soccer field, at the gym, or training MMA.
         </p>
       </ScrollReveal>
 
@@ -37,7 +43,7 @@ export default function About() {
           <BentoCard>
             <h3 className="text-lg font-medium text-accent mb-4">Currently</h3>
             <p className="text-sm text-accent/70 mb-4">
-              Building tools that make developers faster
+              Building LectureAI — AI-powered lecture video generation
             </p>
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
@@ -52,17 +58,16 @@ export default function About() {
         <ScrollReveal delay={0.4}>
           <BentoCard>
             <h3 className="text-lg font-medium text-accent mb-4">Based in</h3>
-            <p className="text-2xl mb-2">🌍</p>
-            <p className="text-sm text-accent/70">Earth</p>
-            <p className="text-xs text-muted mt-1">Remote-first</p>
+            <p className="text-sm text-accent/70">Northern Virginia</p>
+            <p className="text-xs text-muted mt-1">GMU '25</p>
           </BentoCard>
         </ScrollReveal>
 
         <ScrollReveal delay={0.5} className="md:col-span-2">
           <BentoCard>
-            <h3 className="text-lg font-medium text-accent mb-4">Philosophy</h3>
+            <h3 className="text-lg font-medium text-accent mb-4">Off the clock</h3>
             <p className="text-sm text-accent/70">
-              Ship fast, iterate faster. Every pixel matters. Code should be as elegant as the interfaces it creates.
+              Soccer, MMA, gym. Always moving.
             </p>
           </BentoCard>
         </ScrollReveal>

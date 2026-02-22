@@ -131,7 +131,7 @@ function ProjectRow({
 
 export default function Projects() {
   return (
-    <section className="px-6 py-32 md:px-12 lg:px-24 max-w-6xl mx-auto">
+    <section id="projects" className="px-6 py-32 md:px-12 lg:px-24 max-w-6xl mx-auto">
       <div className="mb-12 md:mb-16">
         <ScrollReveal>
           <p className="text-base uppercase tracking-wider text-muted">
