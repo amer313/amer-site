@@ -5,10 +5,9 @@ import MagneticWrap from "@/components/MagneticWrap";
 import Marquee from "@/components/Marquee";
 
 const socialLinks = [
-  { name: "Email", href: "mailto:hello@amerabbadi.com" },
-  { name: "GitHub", href: "https://github.com" },
-  { name: "LinkedIn", href: "https://linkedin.com" },
-  { name: "Twitter", href: "https://twitter.com" },
+  { name: "Email", href: "mailto:amerabbadi377@gmail.com" },
+  { name: "GitHub", href: "https://github.com/amer313" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/amer-abbadi/" },
 ];
 
 export default function Contact() {
@@ -21,7 +20,7 @@ export default function Contact() {
       <section className="px-6 md:px-12 lg:px-24">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
-            <p className="text-sm uppercase tracking-wider text-muted mb-8">
+            <p className="text-base uppercase tracking-wider text-muted mb-8">
               Contact
             </p>
           </ScrollReveal>

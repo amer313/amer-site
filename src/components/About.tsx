@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section className="px-6 py-32 md:px-12 lg:px-24 max-w-5xl mx-auto">
       <ScrollReveal>
-        <p className="text-sm uppercase tracking-widest text-muted">About</p>
+        <p className="text-base uppercase tracking-widest text-muted">About</p>
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>

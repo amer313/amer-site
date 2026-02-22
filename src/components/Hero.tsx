@@ -21,28 +21,28 @@ export default function Hero() {
 
       {/* ── Top-left: Name ── */}
       <div className="absolute left-6 top-8 z-10 md:left-12">
-        <motion.p {...fadeUp(0.2)} className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
+        <motion.p {...fadeUp(0.2)} className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
           // Portfolio 2026
         </motion.p>
-        <motion.p {...fadeUp(0.35)} className="mt-1 font-mono text-xs text-muted">
+        <motion.p {...fadeUp(0.35)} className="mt-1 font-mono text-sm text-muted">
           Amer Abbadi
         </motion.p>
       </div>
 
       {/* ── Top-right: Status ── */}
       <div className="absolute right-6 top-8 z-10 text-right md:right-12">
-        <motion.p {...fadeUp(0.3)} className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
+        <motion.p {...fadeUp(0.3)} className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
           ////// Status
         </motion.p>
-        <motion.p {...fadeUp(0.45)} className="mt-1 font-mono text-xs text-muted">
+        <motion.p {...fadeUp(0.45)} className="mt-1 font-mono text-sm text-muted">
           Available for work
         </motion.p>
         <motion.div {...fadeUp(0.55)} className="mt-2 flex items-center justify-end gap-2">
-          <span className="relative flex h-1.5 w-1.5">
+          <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
           </span>
-          <span className="font-mono text-[10px] text-green-500">ONLINE</span>
+          <span className="font-mono text-xs text-green-500">ONLINE</span>
         </motion.div>
       </div>
 
@@ -59,7 +59,7 @@ export default function Hero() {
 
         <motion.p
           {...fadeUp(1.2)}
-          className="mt-8 max-w-md font-mono text-sm leading-relaxed text-muted"
+          className="mt-8 max-w-md font-mono text-base leading-relaxed text-muted"
         >
           Developer. Builder. Creator.
         </motion.p>
@@ -68,10 +68,10 @@ export default function Hero() {
       {/* ── Bottom-left: Scroll indicator ── */}
       <div className="absolute bottom-8 left-6 z-10 md:left-12">
         <motion.div {...fadeUp(1.6)} className="flex flex-col gap-2">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
             Scroll down to
           </p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
             discover.
           </p>
           <motion.div
@@ -85,10 +85,10 @@ export default function Hero() {
 
       {/* ── Bottom-right: Coordinates / Location ── */}
       <div className="absolute bottom-8 right-6 z-10 text-right md:right-12">
-        <motion.p {...fadeUp(1.4)} className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+        <motion.p {...fadeUp(1.4)} className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
           Full-Stack Engineer
         </motion.p>
-        <motion.p {...fadeUp(1.5)} className="mt-1 font-mono text-[10px] text-muted">
+        <motion.p {...fadeUp(1.5)} className="mt-1 font-mono text-xs text-muted">
           Remote — Worldwide
         </motion.p>
       </div>
