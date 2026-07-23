@@ -1,20 +1,17 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
 
-  const mid = { damping: 22, stiffness: 300, mass: 0.4 };
-  const outer = { damping: 28, stiffness: 180, mass: 0.7 };
-  const midX = useSpring(cursorX, mid);
-  const midY = useSpring(cursorY, mid);
-  const outerX = useSpring(cursorX, outer);
-  const outerY = useSpring(cursorY, outer);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const ringX = useSpring(cursorX, { damping: 26, stiffness: 250, mass: 0.5 });
+  const ringY = useSpring(cursorY, { damping: 26, stiffness: 250, mass: 0.5 });
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -23,8 +20,6 @@ export default function CustomCursor() {
     },
     [cursorX, cursorY]
   );
-
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
     setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
@@ -45,7 +40,6 @@ export default function CustomCursor() {
         setIsHovering(true);
       }
     };
-
     const handleMouseOut = () => setIsHovering(false);
     const handleMouseDown = () => setIsPressed(true);
     const handleMouseUp = () => setIsPressed(false);
@@ -67,77 +61,43 @@ export default function CustomCursor() {
 
   if (isTouchDevice) return null;
 
-  const innerSize = isPressed ? 10 : isHovering ? 18 : 14;
-  const midSize = isPressed ? 18 : isHovering ? 32 : 24;
-  const outerSize = isPressed ? 26 : isHovering ? 48 : 36;
-
   return (
     <>
-      {/* Outer triangle — slowest, largest */}
+      {/* trailing ring — ember on hover */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[997] mix-blend-difference"
-        data-no-transition
+        className="pointer-events-none fixed left-0 top-0 z-[998] rounded-full border"
         style={{
-          x: outerX,
-          y: outerY,
+          x: ringX,
+          y: ringY,
           translateX: "-50%",
           translateY: "-50%",
+          borderColor: isHovering
+            ? "var(--cursor-border-hover)"
+            : "var(--cursor-border)",
         }}
         animate={{
-          width: outerSize,
-          height: outerSize,
-          rotate: isPressed ? 120 : isHovering ? 240 : 0,
+          width: isPressed ? 22 : isHovering ? 44 : 32,
+          height: isPressed ? 22 : isHovering ? 44 : 32,
         }}
-        transition={{ type: "spring", damping: 28, stiffness: 180 }}
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1" className="h-full w-full opacity-40">
-          <polygon points="12,2 22,20 2,20" />
-        </svg>
-      </motion.div>
+        transition={{ type: "spring", damping: 24, stiffness: 300 }}
+      />
 
-      {/* Middle triangle — medium speed */}
+      {/* core dot — instant */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[998] mix-blend-difference"
-        data-no-transition
-        style={{
-          x: midX,
-          y: midY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{
-          width: midSize,
-          height: midSize,
-          rotate: isPressed ? 60 : isHovering ? 180 : 0,
-        }}
-        transition={{ type: "spring", damping: 22, stiffness: 300 }}
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="h-full w-full opacity-70">
-          <polygon points="12,2 22,20 2,20" />
-        </svg>
-      </motion.div>
-
-      {/* Inner triangle — fastest, smallest, solid */}
-      <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[999] mix-blend-difference"
-        data-no-transition
+        className="pointer-events-none fixed left-0 top-0 z-[999] rounded-full"
         style={{
           x: cursorX,
           y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
+          background: isHovering ? "var(--ember)" : "var(--cursor-color)",
         }}
         animate={{
-          width: innerSize,
-          height: innerSize,
-          rotate: isPressed ? 30 : isHovering ? 60 : 0,
+          width: isPressed ? 8 : 5,
+          height: isPressed ? 8 : 5,
         }}
-        transition={{ type: "spring", damping: 18, stiffness: 400 }}
-      >
-        <svg viewBox="0 0 24 24" fill="white" className="h-full w-full">
-          <polygon points="12,2 22,20 2,20" />
-        </svg>
-      </motion.div>
+        transition={{ type: "spring", damping: 20, stiffness: 400 }}
+      />
     </>
   );
 }

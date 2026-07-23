@@ -3,43 +3,33 @@
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--srf);
-  --color-accent: var(--acc);
+  --color-ink: var(--ink);
   --color-muted: var(--mut);
-  --font-sans: var(--font-inter);
+  --color-dim: var(--dim);
+  --color-ember: var(--ember);
+  --font-sans: var(--font-archivo);
   --font-mono: var(--font-jetbrains);
-  --font-display: var(--font-display);
+  --font-serif: var(--font-instrument);
 }
 
-/* Dark theme (default) */
+/*
+ * EMBER — warm near-black, bone-white ink, burnt-orange accent.
+ * Dark only. This site does not apologize.
+ */
 :root {
-  --bg: #050505;
-  --srf: #0a0a0a;
-  --acc: #e0e0e0;
-  --mut: #555555;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.25);
-  --selection-bg: rgba(255, 255, 255, 0.15);
-  --selection-color: white;
-  --noise-opacity: 0.03;
-  --cursor-color: white;
-  --cursor-border: rgba(255, 255, 255, 0.4);
-  --cursor-border-hover: rgba(255, 255, 255, 0.8);
-}
-
-/* Light theme */
-[data-theme="light"] {
-  --bg: #f5f5f0;
-  --srf: #eaeae5;
-  --acc: #1a1a1a;
-  --mut: #888888;
-  --border: rgba(0, 0, 0, 0.1);
-  --border-hover: rgba(0, 0, 0, 0.3);
-  --selection-bg: rgba(0, 0, 0, 0.12);
-  --selection-color: black;
-  --noise-opacity: 0.02;
-  --cursor-color: #1a1a1a;
-  --cursor-border: rgba(0, 0, 0, 0.3);
-  --cursor-border-hover: rgba(0, 0, 0, 0.7);
+  --bg: #0a0908;
+  --srf: #12100e;
+  --ink: #e8e6e1;
+  --mut: #8a8580;
+  --dim: #55514c;
+  --ember: #ff4d00;
+  --ember-dim: rgba(255, 77, 0, 0.35);
+  --border: rgba(232, 230, 225, 0.08);
+  --border-hover: rgba(232, 230, 225, 0.28);
+  --noise-opacity: 0.035;
+  --cursor-color: #e8e6e1;
+  --cursor-border: rgba(232, 230, 225, 0.35);
+  --cursor-border-hover: rgba(255, 77, 0, 0.9);
 }
 
 @media (pointer: fine) {
@@ -51,32 +41,55 @@
 html,
 body {
   background: var(--bg);
-  color: var(--acc);
-  transition: background 0.6s ease, color 0.6s ease;
+  color: var(--ink);
 }
 
 body {
   overflow-x: hidden;
 }
 
-/* Smooth transitions for theme switch */
-*,
-*::before,
-*::after {
-  transition: background-color 0.6s ease, border-color 0.6s ease, color 0.4s ease;
-}
-
-/* Opt out of transition for animations */
-[data-no-transition],
-[data-no-transition] *  {
-  transition: none !important;
-}
-
 ::selection {
-  background: var(--selection-bg);
-  color: var(--selection-color);
+  background: var(--ember);
+  color: #0a0908;
 }
 
+/* ---- type utilities ---- */
+.font-serif-it {
+  font-family: var(--font-instrument), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.text-label {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ---- ember underline sweep for inline links ---- */
+.link-sweep {
+  position: relative;
+}
+.link-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: var(--ember);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.link-sweep:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---- lenis ---- */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -92,4 +105,15 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* ---- reduced motion: kill the theatrics ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

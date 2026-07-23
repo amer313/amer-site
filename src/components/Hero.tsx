@@ -1,97 +1,88 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import SplitText from "@/components/SplitText";
+import Scramble from "@/components/Scramble";
 
-const HeroScene = dynamic(() => import("@/components/HeroScene"), {
-  ssr: false,
-});
+const ease = [0.215, 0.61, 0.355, 1] as const;
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 12 },
+const reveal = (delay: number) => ({
+  initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, delay, ease: [0.215, 0.61, 0.355, 1] as const },
+  transition: { duration: 0.9, delay, ease },
 });
 
 export default function Hero() {
   return (
-    <section className="relative flex h-screen items-center justify-center overflow-hidden">
-      <HeroScene />
-
-      {/* ── Top-left: Name ── */}
-      <div className="absolute left-6 top-8 z-10 md:left-12">
-        <motion.p {...fadeUp(0.2)} className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-          // Portfolio 2026
-        </motion.p>
-        <motion.p {...fadeUp(0.35)} className="mt-1 font-mono text-sm text-muted">
-          Amer Abbadi
-        </motion.p>
+    <section
+      id="top"
+      className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pt-28 md:px-10"
+    >
+      {/* faint vertical hairlines, editorial column ghosts */}
+      <div className="pointer-events-none absolute inset-0 mx-auto hidden max-w-6xl justify-between px-10 md:flex">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="h-full w-px bg-[var(--border)] opacity-50" />
+        ))}
       </div>
 
-      {/* ── Top-right: Status ── */}
-      <div className="absolute right-6 top-8 z-10 text-right md:right-12">
-        <motion.p {...fadeUp(0.3)} className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-          ////// Status
+      <div className="relative mx-auto w-full max-w-6xl">
+        <motion.p {...reveal(2.3)} className="text-label text-ember">
+          {"// SECURITY ENGINEER · FOUNDER"}
         </motion.p>
-        <motion.p {...fadeUp(0.45)} className="mt-1 font-mono text-sm text-muted">
-          Available for work
-        </motion.p>
-        <motion.div {...fadeUp(0.55)} className="mt-2 flex items-center justify-end gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-          </span>
-          <span className="font-mono text-xs text-green-500">ONLINE</span>
-        </motion.div>
-      </div>
 
-      {/* ── Center: Main Title ── */}
-      <div className="relative z-10 flex flex-col items-center text-center">
-        <h1 className="text-[clamp(3rem,12vw,10rem)] font-bold leading-[0.85] tracking-[-0.06em] text-accent" style={{ fontFamily: "var(--font-display)" }}>
-          <div>
-            <SplitText text="AMER" delay={0.3} />
-          </div>
-          <div>
-            <SplitText text="ABBADI" delay={0.6} />
-          </div>
+        <h1 className="mt-8 text-[13vw] font-medium leading-[0.92] tracking-[-0.045em] text-ink md:text-[7.5rem] lg:text-[8.5rem]">
+          <motion.span {...reveal(2.45)} className="block">
+            Building trust
+          </motion.span>
+          <motion.span {...reveal(2.6)} className="block">
+            for machines
+          </motion.span>
+          <motion.span {...reveal(2.75)} className="block">
+            that <span className="font-serif-it text-ember">think.</span>
+          </motion.span>
         </h1>
 
         <motion.p
-          {...fadeUp(1.2)}
-          className="mt-8 max-w-md font-mono text-base leading-relaxed text-muted"
+          {...reveal(3.0)}
+          className="mt-10 max-w-md text-base leading-relaxed text-muted md:text-lg"
         >
-          Developer. Builder. Creator.
+          Founder of{" "}
+          <a
+            href="https://quintai.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-sweep text-ink"
+            data-cursor="pointer"
+          >
+            Quint
+          </a>{" "}
+          — behavioral security for AI agents. Shipping at Amazon by day.
+          Occasionally getting punched in the face on purpose.
         </motion.p>
       </div>
 
-      {/* ── Bottom-left: Scroll indicator ── */}
-      <div className="absolute bottom-8 left-6 z-10 md:left-12">
-        <motion.div {...fadeUp(1.6)} className="flex flex-col gap-2">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            Scroll down to
-          </p>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            discover.
-          </p>
-          <motion.div
-            className="mt-2 h-8 w-px bg-accent/20"
-            animate={{ scaleY: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            style={{ originY: 0 }}
-          />
-        </motion.div>
-      </div>
-
-      {/* ── Bottom-right: Coordinates / Location ── */}
-      <div className="absolute bottom-8 right-6 z-10 text-right md:right-12">
-        <motion.p {...fadeUp(1.4)} className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          Full-Stack Engineer
-        </motion.p>
-        <motion.p {...fadeUp(1.5)} className="mt-1 font-mono text-xs text-muted">
-          Remote — Worldwide
-        </motion.p>
-      </div>
+      {/* telemetry strip */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 3.4 }}
+        className="relative mt-20 border-t border-[var(--border)]"
+      >
+        <div className="flex items-center overflow-x-auto font-mono text-[0.6rem] tracking-[0.15em] text-dim md:text-[0.65rem]">
+          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
+            LOC — VIRGINIA, US
+          </span>
+          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
+            STATUS — <span className="text-green-500">●</span>{" "}
+            <Scramble text="BUILDING" onView onHover className="text-muted" />
+          </span>
+          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
+            FOCUS — AGENT SECURITY
+          </span>
+          <span className="ml-auto hidden whitespace-nowrap px-6 py-3.5 text-ember md:block md:px-10">
+            SCROLL ↓
+          </span>
+        </div>
+      </motion.div>
     </section>
   );
 }

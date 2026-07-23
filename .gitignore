@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# superpowers brainstorm
+.superpowers/
+
+# playwright mcp artifacts
+.playwright-mcp/

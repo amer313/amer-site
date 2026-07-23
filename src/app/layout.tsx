@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Orbitron } from "next/font/google";
+import { Archivo, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
-import ThemeToggle from "@/components/ThemeToggle";
 import CustomCursor from "@/components/CustomCursor";
-import CursorGates from "@/components/CursorGates";
 import SmoothScroll from "@/components/SmoothScroll";
-import Nav from "@/components/Nav";
+import NoiseOverlay from "@/components/NoiseOverlay";
+import TopBar from "@/components/TopBar";
 
-const inter = Inter({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-archivo",
 });
 
 const jetbrains = JetBrains_Mono({
@@ -18,18 +16,23 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const orbitron = Orbitron({
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-display",
+  weight: "400",
+  style: "italic",
+  variable: "--font-instrument",
 });
 
+const description =
+  "Founder of Quint — behavioral security for AI agents. Software engineer at Amazon. Building trust for machines that think.";
+
 export const metadata: Metadata = {
-  title: "Amer Abbadi — Full-Stack Developer",
-  description: "Full-stack developer based in Northern Virginia. Building products with Next.js, React, and AI.",
+  title: "Amer Abbadi — Security Engineer & Founder",
+  description,
   metadataBase: new URL("https://amerabbadi.com"),
   openGraph: {
-    title: "Amer Abbadi — Full-Stack Developer",
-    description: "Full-stack developer based in Northern Virginia. Building products with Next.js, React, and AI.",
+    title: "Amer Abbadi — Security Engineer & Founder",
+    description,
     url: "https://amerabbadi.com",
     siteName: "Amer Abbadi",
     locale: "en_US",
@@ -37,8 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amer Abbadi — Full-Stack Developer",
-    description: "Full-stack developer based in Northern Virginia. Building products with Next.js, React, and AI.",
+    title: "Amer Abbadi — Security Engineer & Founder",
+    description,
   },
   icons: {
     icon: "/favicon.svg",
@@ -51,15 +54,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${orbitron.variable}`} data-theme="dark">
+    <html
+      lang="en"
+      className={`${archivo.variable} ${jetbrains.variable} ${instrument.variable}`}
+    >
       <body className="bg-bg font-sans antialiased">
-        <ThemeProvider>
-          <CustomCursor />
-          <CursorGates />
-          <ThemeToggle />
-          <Nav />
-          <SmoothScroll>{children}</SmoothScroll>
-        </ThemeProvider>
+        <CustomCursor />
+        <NoiseOverlay />
+        <TopBar />
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
