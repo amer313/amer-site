@@ -45,7 +45,7 @@ export default function Hero() {
           {...reveal(3.0)}
           className="mt-10 max-w-lg text-lg leading-relaxed text-muted md:text-xl"
         >
-          Engineer and founder. Building security for autonomous systems —
+          Engineer and founder. Building security for autonomous systems,
           currently in stealth. One rule:{" "}
           <span className="text-ink">excel in every human domain.</span>
         </motion.p>
@@ -74,17 +74,14 @@ export default function Hero() {
       >
         <div className="flex items-center overflow-x-auto font-mono text-sm tracking-[0.15em] text-dim md:text-base">
           <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
-            STATUS — <span className="text-green-500">●</span>{" "}
+            STATUS: <span className="text-green-500">●</span>{" "}
             <Scramble text="BUILDING" onView onHover className="text-muted" />
           </span>
           <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
-            MODE — STEALTH
+            MODE: STEALTH
           </span>
-          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
-            FOCUS — AGENT SECURITY
-          </span>
-          <span className="ml-auto hidden whitespace-nowrap px-6 py-3.5 text-ember md:block md:px-10">
-            © {new Date().getFullYear()}
+          <span className="whitespace-nowrap px-6 py-3.5 md:px-10">
+            FOCUS: AGENT SECURITY
           </span>
         </div>
       </motion.div>

@@ -3,7 +3,7 @@ import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import NoiseOverlay from "@/components/NoiseOverlay";
-import GeoField from "@/components/GeoField";
+import FlowField from "@/components/FlowField";
 import TopBar from "@/components/TopBar";
 
 const archivo = Archivo({
@@ -20,11 +20,11 @@ const description =
   "Engineer and founder. Building security for autonomous systems. Building trust for machines that think.";
 
 export const metadata: Metadata = {
-  title: "Amer Abbadi — Engineer & Founder",
+  title: "Amer Abbadi | Engineer & Founder",
   description,
   metadataBase: new URL("https://amerabbadi.com"),
   openGraph: {
-    title: "Amer Abbadi — Security Engineer & Founder",
+    title: "Amer Abbadi | Engineer & Founder",
     description,
     url: "https://amerabbadi.com",
     siteName: "Amer Abbadi",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amer Abbadi — Security Engineer & Founder",
+    title: "Amer Abbadi | Engineer & Founder",
     description,
   },
   icons: {
@@ -56,7 +56,7 @@ export default function RootLayout({
       className={`${archivo.variable} ${jetbrains.variable}`}
     >
       <body className="bg-bg font-sans antialiased">
-        <GeoField />
+        <FlowField />
         <NoiseOverlay />
         <TopBar />
         <SmoothScroll>{children}</SmoothScroll>
