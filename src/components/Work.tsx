@@ -9,17 +9,17 @@ const ease = [0.215, 0.61, 0.355, 1] as const;
 const entries = [
   {
     index: "01",
-    title: "Quint",
+    title: "Stealth",
     role: "FOUNDER",
-    year: "2026 —",
+    year: "NOW",
     description:
-      "Behavioral security for AI agents. Watches what agents actually do — not what they claim — and stops them when behavior drifts. The immune system for the agentic era.",
+      "Security for autonomous systems. Watching what machines actually do — not what they claim. More soon.",
     tags: ["AGENT SECURITY", "BEHAVIORAL INTEL", "RUNTIME"],
-    href: "https://quintai.dev",
+    href: null,
   },
   {
     index: "02",
-    title: "Amazon",
+    title: "Big Tech",
     role: "SOFTWARE ENGINEER",
     year: "— NOW",
     description:
@@ -29,13 +29,13 @@ const entries = [
   },
   {
     index: "03",
-    title: "LectureAI",
+    title: "Products",
     role: "BUILDER",
-    year: "2025",
+    year: "ALWAYS",
     description:
-      "Upload slides, get a lecture — AI-generated video lectures from PDFs. Built end-to-end: rendering pipeline, voice synthesis, the works.",
-    tags: ["NEXT.JS", "AI", "FFMPEG", "AWS"],
-    href: "https://lecture-ai.com",
+      "A trail of shipped side projects — AI video pipelines, developer tools, this site. Built end-to-end, shipped fast.",
+    tags: ["AI", "FULL-STACK", "ZERO TO ONE"],
+    href: null,
   },
 ];
 

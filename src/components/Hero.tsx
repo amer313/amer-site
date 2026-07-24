@@ -26,7 +26,7 @@ export default function Hero() {
 
       <div className="relative mx-auto w-full max-w-6xl">
         <motion.p {...reveal(2.3)} className="text-label text-ember">
-          {"// SECURITY ENGINEER · FOUNDER"}
+          {"// ENGINEER · FOUNDER"}
         </motion.p>
 
         <h1 className="mt-8 text-[13vw] font-medium leading-[0.92] tracking-[-0.045em] text-ink md:text-[7.5rem] lg:text-[8.5rem]">
@@ -37,7 +37,7 @@ export default function Hero() {
             for machines
           </motion.span>
           <motion.span {...reveal(2.75)} className="block">
-            that <span className="font-serif-it text-ember">think.</span>
+            that <span className="text-ember">think.</span>
           </motion.span>
         </h1>
 
@@ -45,18 +45,8 @@ export default function Hero() {
           {...reveal(3.0)}
           className="mt-10 max-w-md text-base leading-relaxed text-muted md:text-lg"
         >
-          Founder of{" "}
-          <a
-            href="https://quintai.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-sweep text-ink"
-            data-cursor="pointer"
-          >
-            Quint
-          </a>{" "}
-          — behavioral security for AI agents. Shipping at Amazon by day.
-          Occasionally getting punched in the face on purpose.
+          Engineer and founder. Building security for autonomous systems —
+          currently in stealth.
         </motion.p>
       </div>
 
@@ -69,11 +59,11 @@ export default function Hero() {
       >
         <div className="flex items-center overflow-x-auto font-mono text-[0.6rem] tracking-[0.15em] text-dim md:text-[0.65rem]">
           <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
-            LOC — VIRGINIA, US
-          </span>
-          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
             STATUS — <span className="text-green-500">●</span>{" "}
             <Scramble text="BUILDING" onView onHover className="text-muted" />
+          </span>
+          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
+            MODE — STEALTH
           </span>
           <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
             FOCUS — AGENT SECURITY

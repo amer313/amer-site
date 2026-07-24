@@ -9,7 +9,6 @@ const links = [
   { name: "EMAIL", href: "mailto:amerabbadi377@gmail.com", handle: "amerabbadi377@gmail.com" },
   { name: "GITHUB", href: "https://github.com/amer313", handle: "@amer313" },
   { name: "LINKEDIN", href: "https://www.linkedin.com/in/amer-abbadi/", handle: "/amer-abbadi" },
-  { name: "QUINT", href: "https://quintai.dev", handle: "quintai.dev" },
 ];
 
 export default function Contact() {
@@ -28,10 +27,10 @@ export default function Contact() {
           className="text-5xl font-medium leading-[0.95] tracking-[-0.04em] text-ink md:text-8xl"
         >
           Let&apos;s build something{" "}
-          <span className="font-serif-it text-ember">worth watching.</span>
+          <span className="text-ember">worth watching.</span>
         </motion.h2>
 
-        <div className="mt-20 grid grid-cols-1 gap-px border border-[var(--border)] bg-[var(--border)] md:grid-cols-4">
+        <div className="mt-20 grid grid-cols-1 gap-px border border-[var(--border)] bg-[var(--border)] md:grid-cols-3">
           {links.map((link, i) => (
             <motion.a
               key={link.name}

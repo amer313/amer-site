@@ -9,7 +9,6 @@
   --color-ember: var(--ember);
   --font-sans: var(--font-archivo);
   --font-mono: var(--font-jetbrains);
-  --font-serif: var(--font-instrument);
 }
 
 /*
@@ -54,13 +53,6 @@ body {
 }
 
 /* ---- type utilities ---- */
-.font-serif-it {
-  font-family: var(--font-instrument), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-
 .text-label {
   font-family: var(--font-jetbrains), monospace;
   font-size: 0.65rem;

@@ -7,25 +7,25 @@ const ease = [0.215, 0.61, 0.355, 1] as const;
 
 const lines = [
   <>
-    I build systems that <span className="font-serif-it text-ember">watch</span> other
+    I build systems that <span className="text-ember">watch</span> other
     systems.
   </>,
   <>
-    By day I ship at Amazon. The rest of the time I&apos;m building Quint —
-    because the world is about to hand autonomous agents the keys to
-    everything, and someone needs to check their behavior.
+    The world is about to hand autonomous agents the keys to everything —
+    and someone needs to check their behavior. That&apos;s what I&apos;m
+    building.
   </>,
   <>
-    Off the clock: soccer, MMA, the gym.{" "}
-    <span className="font-serif-it text-ink">Always moving.</span>
+    Off the clock: soccer, MMA, the gym. One rule —{" "}
+    <span className="text-ember">excel in every human domain.</span>
   </>,
 ];
 
 const facts = [
-  { k: "BASE", v: "Northern Virginia" },
-  { k: "EDU", v: "George Mason '25" },
+  { k: "ROLE", v: "Engineer · Founder" },
   { k: "STACK", v: "TypeScript · Go · Python · AWS" },
   { k: "TRAINING", v: "MMA, reluctantly humble" },
+  { k: "STATUS", v: "Building in stealth" },
 ];
 
 export default function About() {

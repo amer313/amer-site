@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -16,18 +16,11 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: "italic",
-  variable: "--font-instrument",
-});
-
 const description =
-  "Founder of Quint — behavioral security for AI agents. Software engineer at Amazon. Building trust for machines that think.";
+  "Engineer and founder. Building security for autonomous systems. Building trust for machines that think.";
 
 export const metadata: Metadata = {
-  title: "Amer Abbadi — Security Engineer & Founder",
+  title: "Amer Abbadi — Engineer & Founder",
   description,
   metadataBase: new URL("https://amerabbadi.com"),
   openGraph: {
@@ -56,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${jetbrains.variable} ${instrument.variable}`}
+      className={`${archivo.variable} ${jetbrains.variable}`}
     >
       <body className="bg-bg font-sans antialiased">
         <CustomCursor />
