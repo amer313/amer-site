@@ -1,11 +1,9 @@
-import BootIntro from "@/components/BootIntro";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 
 export default function Home() {
   return (
     <main className="relative z-10">
-      <BootIntro />
       <Hero />
       {/* content TBD; shell in place so the page has a second act */}
       <Section

@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Scramble from "@/components/Scramble";
 
 const ease = [0.215, 0.61, 0.355, 1] as const;
 
 const reveal = (delay: number) => ({
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.9, delay, ease },
+  transition: { duration: 0.7, delay, ease },
 });
 
 const socials = [
@@ -22,35 +21,35 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pt-28 md:px-10"
+      className="relative flex min-h-svh flex-col overflow-hidden px-6 pt-28 md:px-10"
     >
       <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center pb-16">
-        <motion.p {...reveal(2.3)} className="text-label text-ember">
+        <motion.p {...reveal(0)} className="text-label text-ember">
           {"// ENGINEER · FOUNDER"}
         </motion.p>
 
         <h1 className="mt-8 text-[13vw] font-medium leading-[0.92] tracking-[-0.045em] text-ink md:text-[7.5rem] lg:text-[8.5rem]">
-          <motion.span {...reveal(2.45)} className="block">
+          <motion.span {...reveal(0.05)} className="block">
             Building trust
           </motion.span>
-          <motion.span {...reveal(2.6)} className="block">
+          <motion.span {...reveal(0.15)} className="block">
             for machines
           </motion.span>
-          <motion.span {...reveal(2.75)} className="block">
+          <motion.span {...reveal(0.25)} className="block">
             that <span className="text-ember">think.</span>
           </motion.span>
         </h1>
 
         <motion.p
-          {...reveal(3.0)}
+          {...reveal(0.35)}
           className="mt-10 max-w-lg text-lg leading-relaxed text-muted md:text-xl"
         >
           Engineer and founder. Building security for autonomous systems,
-          currently in stealth. One rule:{" "}
-          <span className="text-ink">excel in every human domain.</span>
+          currently in stealth.{" "}
+          <span className="text-ink">Excel in every human domain.</span>
         </motion.p>
 
-        <motion.div {...reveal(3.2)} className="mt-12 flex flex-wrap gap-4">
+        <motion.div {...reveal(0.45)} className="mt-12 flex flex-wrap gap-4">
           {socials.map((s) => (
             <a
               key={s.name}
@@ -64,27 +63,6 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
-
-      {/* telemetry strip */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 3.4 }}
-        className="relative border-t border-[var(--border)]"
-      >
-        <div className="flex items-center overflow-x-auto font-mono text-sm tracking-[0.15em] text-dim md:text-base">
-          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
-            STATUS: <span className="text-green-500">●</span>{" "}
-            <Scramble text="BUILDING" onView onHover className="text-muted" />
-          </span>
-          <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
-            MODE: STEALTH
-          </span>
-          <span className="whitespace-nowrap px-6 py-3.5 md:px-10">
-            FOCUS: AGENT SECURITY
-          </span>
-        </div>
-      </motion.div>
     </section>
   );
 }
