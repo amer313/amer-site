@@ -24,16 +24,16 @@ npm run lint    # ESLint (next core-web-vitals + typescript)
 
 ## Architecture
 
-- `src/app/` — App Router pages and layout. Single-page site with sections as components: BootIntro → Hero → Work → About → Contact.
+- `src/app/` — App Router pages and layout. Single-viewport one-pager: BootIntro → Hero (that's it — no Work/About/Contact sections by design; content stays vague/stealth).
 - `src/components/` — All UI components. No subdirectory nesting.
 - `@/*` path alias maps to `./src/*`
 - **Design system: "Ember"** — dark only (no theme toggle). CSS variables in `globals.css`: `--bg` (warm near-black), `--ink` (bone white), `--ember` (#ff4d00 accent), `--mut`/`--dim` (grays).
-- Signature elements: boot-sequence intro (once per tab via sessionStorage), text scramble effect (`Scramble.tsx`), mono telemetry strips, serif-italic accent words, ember wipe on work rows.
+- Signature elements: boot-sequence intro (once per tab via sessionStorage), reactive lattice background (`GeoField.tsx` — canvas, pointer warp + ember signal pulses), text scramble effect (`Scramble.tsx`), mono telemetry strip.
+- No custom cursor (removed by request). No serif font (removed by request). Keep text prominent — no sub-`text-sm` mono labels.
 
 ## Conventions
 
 - Use conventional commits: `feat:`, `fix:`, `chore:`, `refactor:`, etc.
-- Custom cursor hides the native cursor on `pointer: fine` devices — keep `cursor: none` in globals.css
 - Tailwind v4 uses `@theme inline` directive for design tokens, not `tailwind.config`
 
 ## Design Reference

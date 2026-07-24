@@ -11,20 +11,20 @@ const reveal = (delay: number) => ({
   transition: { duration: 0.9, delay, ease },
 });
 
+const socials = [
+  { name: "GITHUB", href: "https://github.com/amer313" },
+  { name: "LINKEDIN", href: "https://www.linkedin.com/in/amer-abbadi/" },
+  { name: "X", href: "https://x.com/amer_abbadi" },
+  { name: "EMAIL", href: "mailto:amerabbadi377@gmail.com" },
+];
+
 export default function Hero() {
   return (
     <section
       id="top"
       className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pt-28 md:px-10"
     >
-      {/* faint vertical hairlines, editorial column ghosts */}
-      <div className="pointer-events-none absolute inset-0 mx-auto hidden max-w-6xl justify-between px-10 md:flex">
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i} className="h-full w-px bg-[var(--border)] opacity-50" />
-        ))}
-      </div>
-
-      <div className="relative mx-auto w-full max-w-6xl">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center pb-16">
         <motion.p {...reveal(2.3)} className="text-label text-ember">
           {"// ENGINEER · FOUNDER"}
         </motion.p>
@@ -43,11 +43,26 @@ export default function Hero() {
 
         <motion.p
           {...reveal(3.0)}
-          className="mt-10 max-w-md text-base leading-relaxed text-muted md:text-lg"
+          className="mt-10 max-w-lg text-lg leading-relaxed text-muted md:text-xl"
         >
           Engineer and founder. Building security for autonomous systems —
-          currently in stealth.
+          currently in stealth. One rule:{" "}
+          <span className="text-ink">excel in every human domain.</span>
         </motion.p>
+
+        <motion.div {...reveal(3.2)} className="mt-12 flex flex-wrap gap-4">
+          {socials.map((s) => (
+            <a
+              key={s.name}
+              href={s.href}
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="group border border-[var(--border)] px-6 py-3 font-mono text-sm tracking-[0.15em] text-muted transition-colors duration-300 hover:border-[var(--ember)] hover:text-ember"
+            >
+              {s.name} <span className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+            </a>
+          ))}
+        </motion.div>
       </div>
 
       {/* telemetry strip */}
@@ -55,9 +70,9 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 3.4 }}
-        className="relative mt-20 border-t border-[var(--border)]"
+        className="relative border-t border-[var(--border)]"
       >
-        <div className="flex items-center overflow-x-auto font-mono text-[0.6rem] tracking-[0.15em] text-dim md:text-[0.65rem]">
+        <div className="flex items-center overflow-x-auto font-mono text-sm tracking-[0.15em] text-dim md:text-base">
           <span className="whitespace-nowrap border-r border-[var(--border)] px-6 py-3.5 md:px-10">
             STATUS — <span className="text-green-500">●</span>{" "}
             <Scramble text="BUILDING" onView onHover className="text-muted" />
@@ -69,7 +84,7 @@ export default function Hero() {
             FOCUS — AGENT SECURITY
           </span>
           <span className="ml-auto hidden whitespace-nowrap px-6 py-3.5 text-ember md:block md:px-10">
-            SCROLL ↓
+            © {new Date().getFullYear()}
           </span>
         </div>
       </motion.div>

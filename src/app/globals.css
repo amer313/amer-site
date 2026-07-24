@@ -19,22 +19,13 @@
   --bg: #0a0908;
   --srf: #12100e;
   --ink: #e8e6e1;
-  --mut: #8a8580;
-  --dim: #55514c;
+  --mut: #9a958f;
+  --dim: #767068;
   --ember: #ff4d00;
   --ember-dim: rgba(255, 77, 0, 0.35);
   --border: rgba(232, 230, 225, 0.08);
   --border-hover: rgba(232, 230, 225, 0.28);
   --noise-opacity: 0.035;
-  --cursor-color: #e8e6e1;
-  --cursor-border: rgba(232, 230, 225, 0.35);
-  --cursor-border-hover: rgba(255, 77, 0, 0.9);
-}
-
-@media (pointer: fine) {
-  * {
-    cursor: none;
-  }
 }
 
 html,
@@ -55,8 +46,8 @@ body {
 /* ---- type utilities ---- */
 .text-label {
   font-family: var(--font-jetbrains), monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import NoiseOverlay from "@/components/NoiseOverlay";
+import GeoField from "@/components/GeoField";
 import TopBar from "@/components/TopBar";
 
 const archivo = Archivo({
@@ -37,7 +37,11 @@ export const metadata: Metadata = {
     description,
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -52,7 +56,7 @@ export default function RootLayout({
       className={`${archivo.variable} ${jetbrains.variable}`}
     >
       <body className="bg-bg font-sans antialiased">
-        <CustomCursor />
+        <GeoField />
         <NoiseOverlay />
         <TopBar />
         <SmoothScroll>{children}</SmoothScroll>

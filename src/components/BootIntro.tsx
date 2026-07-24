@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const LINES = [
   "$ init amer.sys",
   "> loading identity ............ ok",
-  "> mounting /work /about ....... ok",
+  "> lattice online .............. ok",
   "> trust protocol .............. active",
 ];
 
