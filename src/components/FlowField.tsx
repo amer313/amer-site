@@ -28,8 +28,8 @@ export default function FlowField() {
     let raf = 0;
 
     const N = Math.min(
-      750,
-      Math.floor((window.innerWidth * window.innerHeight) / 1800)
+      2200,
+      Math.floor((window.innerWidth * window.innerHeight) / 650)
     );
     const WELL = 260; // cursor influence radius
 

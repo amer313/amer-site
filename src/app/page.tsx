@@ -1,17 +1,26 @@
 import BootIntro from "@/components/BootIntro";
 import Hero from "@/components/Hero";
+import Section from "@/components/Section";
 
 export default function Home() {
   return (
     <main className="relative z-10">
       <BootIntro />
       <Hero />
-      {/* playground: open canvas below the fold, the field is the content */}
-      <section className="pointer-events-none flex h-svh items-end justify-center pb-12">
-        <p className="font-mono text-sm tracking-[0.2em] text-dim">
-          CLICK AND HOLD. THE FIELD LISTENS.
+      {/* content TBD; shell in place so the page has a second act */}
+      <Section
+        id="next"
+        label="Soon"
+        headline={
+          <>
+            This space is <span className="text-ember">reserved.</span>
+          </>
+        }
+      >
+        <p className="max-w-lg text-lg leading-relaxed text-muted md:text-xl">
+          Something is being built here. Check back.
         </p>
-      </section>
+      </Section>
     </main>
   );
 }
