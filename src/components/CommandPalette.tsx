@@ -127,17 +127,6 @@ const COMMANDS: Command[] = [
     },
   },
   {
-    id: "ambush",
-    label: "ambush",
-    hint: "gamertag",
-    group: "SYSTEM",
-    keywords: "gamer tag handle alias gg",
-    run: ({ close, toast }) => {
-      toast("AMBUSH — ONLINE SINCE BEFORE YOU WERE GOOD.");
-      close();
-    },
-  },
-  {
     id: "sudo",
     label: "sudo make me a sandwich",
     group: "SYSTEM",
