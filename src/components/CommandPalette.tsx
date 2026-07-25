@@ -32,14 +32,12 @@ const COMMANDS: Command[] = [
     },
   },
   {
-    id: "principles",
-    label: "Go to principles",
+    id: "next",
+    label: "Go to next section",
     group: "NAVIGATE",
-    keywords: "beliefs rules how i build down",
+    keywords: "soon reserved down",
     run: ({ close }) => {
-      document
-        .getElementById("principles")
-        ?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("next")?.scrollIntoView({ behavior: "smooth" });
       close();
     },
   },
