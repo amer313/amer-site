@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import NoiseOverlay from "@/components/NoiseOverlay";
 import FlowField from "@/components/FlowField";
 import TopBar from "@/components/TopBar";
+import CommandPalette from "@/components/CommandPalette";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
         <FlowField />
         <NoiseOverlay />
         <TopBar />
+        <CommandPalette />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
