@@ -32,12 +32,14 @@ const COMMANDS: Command[] = [
     },
   },
   {
-    id: "next",
-    label: "Go to next section",
+    id: "principles",
+    label: "Go to principles",
     group: "NAVIGATE",
-    keywords: "soon reserved down",
+    keywords: "beliefs rules how i build down",
     run: ({ close }) => {
-      document.getElementById("next")?.scrollIntoView({ behavior: "smooth" });
+      document
+        .getElementById("principles")
+        ?.scrollIntoView({ behavior: "smooth" });
       close();
     },
   },
@@ -123,6 +125,17 @@ const COMMANDS: Command[] = [
     keywords: "about bio identity",
     run: ({ close, toast }) => {
       toast("ENGINEER. FOUNDER. EXCEL IN EVERY HUMAN DOMAIN.");
+      close();
+    },
+  },
+  {
+    id: "ambush",
+    label: "ambush",
+    hint: "gamertag",
+    group: "SYSTEM",
+    keywords: "gamer tag handle alias gg",
+    run: ({ close, toast }) => {
+      toast("AMBUSH — ONLINE SINCE BEFORE YOU WERE GOOD.");
       close();
     },
   },
