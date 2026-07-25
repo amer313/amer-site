@@ -31,7 +31,12 @@ export default function FlowField() {
       2200,
       Math.floor((window.innerWidth * window.innerHeight) / 650)
     );
-    const WELL = 260; // cursor influence radius
+    // influence radius, scaled to viewport so phones get a tight bright
+    // well instead of a huge diffuse one
+    const WELL = Math.max(
+      150,
+      Math.min(260, Math.min(window.innerWidth, window.innerHeight) * 0.42)
+    );
 
     type P = { x: number; y: number; px: number; py: number };
     let ps: P[] = [];
@@ -105,8 +110,9 @@ export default function FlowField() {
             : 0;
         ctx.strokeStyle =
           heat > 0.02
-            ? `rgba(255, ${77 + heat * 90}, ${heat * 40}, ${0.2 + heat * 0.7})`
+            ? `rgba(255, ${77 + heat * 110}, ${heat * 60}, ${0.28 + heat * 0.72})`
             : "rgba(232, 230, 225, 0.16)";
+        ctx.lineWidth = heat > 0.45 ? 1.5 : 1;
         ctx.beginPath();
         ctx.moveTo(p.px, p.py);
         ctx.lineTo(p.x, p.y);
@@ -115,6 +121,8 @@ export default function FlowField() {
 
       raf = requestAnimationFrame(draw);
     };
+
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
     const onMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
@@ -131,22 +139,75 @@ export default function FlowField() {
       invert = 1;
     };
 
+    // touch: dragging moves the well, and it lingers instead of vanishing
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      mouse.x = t.clientX;
+      mouse.y = t.clientY;
+      tiltActive = false; // direct input wins over gyro
+    };
+
+    // gyroscope: tilting the phone drifts the well around, so the field
+    // reacts even when nobody is touching the screen
+    let tiltActive = false;
+    const onTilt = (e: DeviceOrientationEvent) => {
+      if (e.gamma == null || e.beta == null) return;
+      tiltActive = true;
+      // gamma: left/right (-90..90), beta: front/back (-180..180)
+      const nx = Math.max(-1, Math.min(1, e.gamma / 45));
+      const ny = Math.max(-1, Math.min(1, (e.beta - 45) / 45));
+      tiltTarget.x = w / 2 + (nx * w) / 2;
+      tiltTarget.y = h / 2 + (ny * h) / 2;
+    };
+    const tiltTarget = { x: -9999, y: -9999 };
+
+    // ease the tilt-driven well toward its target each frame
+    const tiltRaf = () => {
+      if (tiltActive && tiltTarget.x > -100) {
+        if (mouse.x < -100) {
+          mouse.x = tiltTarget.x;
+          mouse.y = tiltTarget.y;
+        } else {
+          mouse.x += (tiltTarget.x - mouse.x) * 0.05;
+          mouse.y += (tiltTarget.y - mouse.y) * 0.05;
+        }
+      }
+      tiltFrame = requestAnimationFrame(tiltRaf);
+    };
+    let tiltFrame = 0;
+
     fit();
     raf = requestAnimationFrame(draw);
 
     window.addEventListener("resize", fit);
-    window.addEventListener("mousemove", onMove, { passive: true });
-    document.documentElement.addEventListener("mouseleave", onLeave);
     window.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
 
+    if (isTouch) {
+      // seed the well at center so the field is alive on first paint
+      mouse.x = w / 2;
+      mouse.y = h * 0.4;
+      window.addEventListener("touchstart", onTouch, { passive: true });
+      window.addEventListener("touchmove", onTouch, { passive: true });
+      window.addEventListener("deviceorientation", onTilt);
+      tiltFrame = requestAnimationFrame(tiltRaf);
+    } else {
+      window.addEventListener("mousemove", onMove, { passive: true });
+      document.documentElement.addEventListener("mouseleave", onLeave);
+    }
+
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(tiltFrame);
       window.removeEventListener("resize", fit);
       window.removeEventListener("mousemove", onMove);
       document.documentElement.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("deviceorientation", onTilt);
     };
   }, []);
 

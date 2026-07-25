@@ -167,6 +167,7 @@ function score(cmd: Command, q: string) {
 }
 
 export default function CommandPalette() {
+  const [isTouch, setIsTouch] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
@@ -223,6 +224,10 @@ export default function CommandPalette() {
   }, [close, matrix]);
 
   useEffect(() => {
+    setIsTouch(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       setActive(0);
       // focus after mount animation starts
@@ -267,10 +272,28 @@ export default function CommandPalette() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
         onClick={() => setIsOpen(true)}
-        aria-label="Open command palette"
-        className="fixed bottom-6 right-6 z-[80] flex items-center gap-2 border border-[var(--border)] bg-[var(--bg)]/70 px-4 py-2.5 font-mono text-sm tracking-[0.12em] text-dim backdrop-blur-md transition-colors duration-300 hover:border-[var(--ember)] hover:text-ember"
+        aria-label="Open command menu"
+        className="fixed bottom-6 right-6 z-[80] flex items-center gap-2 border border-[var(--border)] bg-[var(--bg)]/70 px-4 py-3 font-mono text-sm tracking-[0.12em] text-dim backdrop-blur-md transition-colors duration-300 hover:border-[var(--ember)] hover:text-ember active:border-[var(--ember)] active:text-ember"
       >
-        <span className="text-base leading-none">⌘</span> K
+        {isTouch ? (
+          // three-line menu glyph on touch; a keyboard hint would be a lie
+          <svg
+            width="18"
+            height="12"
+            viewBox="0 0 18 12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M1 1h16M1 6h16M1 11h10" />
+          </svg>
+        ) : (
+          <>
+            <span className="text-base leading-none">⌘</span> K
+          </>
+        )}
       </motion.button>
 
       {/* toast */}
@@ -327,9 +350,19 @@ export default function CommandPalette() {
                   spellCheck={false}
                   autoComplete="off"
                 />
-                <kbd className="hidden shrink-0 border border-[var(--border)] px-2 py-1 font-mono text-xs text-dim sm:block">
-                  ESC
-                </kbd>
+                {isTouch ? (
+                  <button
+                    onClick={close}
+                    aria-label="Close command menu"
+                    className="shrink-0 border border-[var(--border)] px-2.5 py-1 font-mono text-xs text-dim"
+                  >
+                    ✕
+                  </button>
+                ) : (
+                  <kbd className="hidden shrink-0 border border-[var(--border)] px-2 py-1 font-mono text-xs text-dim sm:block">
+                    ESC
+                  </kbd>
+                )}
               </div>
 
               <div ref={listRef} className="max-h-[52vh] overflow-y-auto py-2">
@@ -380,8 +413,14 @@ export default function CommandPalette() {
               </div>
 
               <div className="flex items-center gap-5 border-t border-[var(--border)] px-5 py-3 font-mono text-xs tracking-[0.12em] text-dim">
-                <span>↑↓ NAVIGATE</span>
-                <span>↵ RUN</span>
+                {isTouch ? (
+                  <span>TAP TO RUN</span>
+                ) : (
+                  <>
+                    <span>↑↓ NAVIGATE</span>
+                    <span>↵ RUN</span>
+                  </>
+                )}
                 <span className="ml-auto">{flat.length} COMMANDS</span>
               </div>
             </motion.div>
