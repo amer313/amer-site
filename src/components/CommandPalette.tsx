@@ -8,7 +8,7 @@ type Command = {
   label: string;
   hint?: string;
   keywords?: string;
-  group: "NAVIGATE" | "CONNECT" | "SYSTEM";
+  group: "CONNECT" | "SYSTEM";
   run: (ctx: Ctx) => void | Promise<void>;
 };
 
@@ -21,26 +21,6 @@ type Ctx = {
 const open = (url: string) => window.open(url, "_blank", "noopener,noreferrer");
 
 const COMMANDS: Command[] = [
-  {
-    id: "top",
-    label: "Go to top",
-    group: "NAVIGATE",
-    keywords: "home hero start",
-    run: ({ close }) => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      close();
-    },
-  },
-  {
-    id: "next",
-    label: "Go to next section",
-    group: "NAVIGATE",
-    keywords: "soon reserved down",
-    run: ({ close }) => {
-      document.getElementById("next")?.scrollIntoView({ behavior: "smooth" });
-      close();
-    },
-  },
   {
     id: "email",
     label: "Copy email address",
@@ -149,7 +129,7 @@ const COMMANDS: Command[] = [
   },
 ];
 
-const GROUP_ORDER: Command["group"][] = ["NAVIGATE", "CONNECT", "SYSTEM"];
+const GROUP_ORDER: Command["group"][] = ["CONNECT", "SYSTEM"];
 
 function score(cmd: Command, q: string) {
   if (!q) return 1;
