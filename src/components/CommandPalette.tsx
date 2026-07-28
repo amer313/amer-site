@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 type Command = {
@@ -131,6 +138,26 @@ const COMMANDS: Command[] = [
 
 const GROUP_ORDER: Command["group"][] = ["CONNECT", "SYSTEM"];
 
+/**
+ * Pointer capability as an external store. A keyboard hint would be a lie on
+ * touch, so this drives which affordances render. Read via
+ * useSyncExternalStore rather than sampled into state in an effect: the value
+ * lives outside React, and the effect version tripped
+ * react-hooks/set-state-in-effect for good reason — it rendered once with a
+ * wrong default before correcting itself.
+ */
+const TOUCH_QUERY = "(pointer: coarse)";
+
+function subscribeToPointer(onChange: () => void) {
+  const mq = window.matchMedia(TOUCH_QUERY);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+const getIsTouch = () => window.matchMedia(TOUCH_QUERY).matches;
+// SSR has no pointer; assume precise so the markup matches the common case.
+const getIsTouchOnServer = () => false;
+
 function score(cmd: Command, q: string) {
   if (!q) return 1;
   const hay = `${cmd.label} ${cmd.hint ?? ""} ${cmd.keywords ?? ""}`.toLowerCase();
@@ -147,7 +174,11 @@ function score(cmd: Command, q: string) {
 }
 
 export default function CommandPalette() {
-  const [isTouch, setIsTouch] = useState(false);
+  const isTouch = useSyncExternalStore(
+    subscribeToPointer,
+    getIsTouch,
+    getIsTouchOnServer
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
@@ -159,6 +190,20 @@ export default function CommandPalette() {
   const close = useCallback(() => {
     setIsOpen(false);
     setQuery("");
+    setActive(0);
+  }, []);
+
+  // Every path that opens or re-filters the list resets the cursor at the
+  // event, not in an effect — an effect would render the stale row selected
+  // for one frame first.
+  const openPalette = useCallback(() => {
+    setQuery("");
+    setActive(0);
+    setIsOpen(true);
+  }, []);
+
+  const onQueryChange = useCallback((next: string) => {
+    setQuery(next);
     setActive(0);
   }, []);
 
@@ -191,7 +236,8 @@ export default function CommandPalette() {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setIsOpen((v) => !v);
+        if (isOpen) close();
+        else openPalette();
         return;
       }
       if (e.key === "Escape") {
@@ -201,23 +247,15 @@ export default function CommandPalette() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [close, matrix]);
+  }, [close, openPalette, isOpen, matrix]);
 
+  // Focus is a DOM side effect, not state — this one belongs in an effect.
+  // Deferred a frame so the mount animation has started and the input exists.
   useEffect(() => {
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches);
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      setActive(0);
-      // focus after mount animation starts
-      requestAnimationFrame(() => inputRef.current?.focus());
-    }
+    if (!isOpen) return;
+    const raf = requestAnimationFrame(() => inputRef.current?.focus());
+    return () => cancelAnimationFrame(raf);
   }, [isOpen]);
-
-  useEffect(() => {
-    setActive(0);
-  }, [query]);
 
   const ctx: Ctx = { close, toast, setMatrix };
 
@@ -251,7 +289,7 @@ export default function CommandPalette() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        onClick={() => setIsOpen(true)}
+        onClick={openPalette}
         aria-label="Open command menu"
         className="fixed bottom-6 right-6 z-[80] flex items-center gap-2 border border-[var(--border)] bg-[var(--bg)]/70 px-4 py-3 font-mono text-sm tracking-[0.12em] text-dim backdrop-blur-md transition-colors duration-300 hover:border-[var(--ember)] hover:text-ember active:border-[var(--ember)] active:text-ember"
       >
@@ -323,7 +361,7 @@ export default function CommandPalette() {
                   name="command"
                   aria-label="Command"
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => onQueryChange(e.target.value)}
                   onKeyDown={onKeyDown}
                   placeholder="Type a command..."
                   className="w-full bg-transparent font-mono text-base text-ink outline-none placeholder:text-dim"
@@ -414,7 +452,6 @@ export default function CommandPalette() {
 /** Ember-tinted digital rain. Click or Esc to exit. */
 function MatrixRain({ onExit }: { onExit: () => void }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const [, setTick] = useState(0);
 
   useEffect(() => {
     const canvas = ref.current;
@@ -470,7 +507,6 @@ function MatrixRain({ onExit }: { onExit: () => void }) {
     fit();
     raf = requestAnimationFrame(draw);
     window.addEventListener("resize", fit);
-    setTick(1);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", fit);
