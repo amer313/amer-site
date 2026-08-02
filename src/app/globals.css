@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Lenis's own stylesheet. Previously hand-copied into the lenis block below and
+   had drifted from upstream — see that block for what the stale copy got wrong. */
+@import "lenis/dist/lenis.css";
 
 @theme inline {
   --color-bg: var(--bg);
@@ -72,23 +75,21 @@ body {
   transform-origin: left;
 }
 
-/* ---- lenis ---- */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
+/* ---- lenis ----
+   Rules now come from `lenis/dist/lenis.css`, imported at the top. The previous
+   hand-copy had drifted from upstream in three ways, each a latent bug:
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
+   - `.lenis.lenis-smooth [data-lenis-prevent]` scoped overscroll containment to
+     `lenis-smooth`, a class present only while a scroll is actively animating.
+     Containment flickered on and off. Upstream scopes it to plain `.lenis` and
+     also covers the -wheel/-touch/-vertical/-horizontal variants.
+   - `.lenis.lenis-stopped { overflow: hidden }` — upstream uses `overflow: clip`
+     and excludes `.lenis-autoToggle`. `hidden` creates a scroll container, so it
+     can reset scroll position; `clip` does not.
+   - Missing `.lenis.lenis-smooth iframe { pointer-events: none }`, which stops an
+     iframe from swallowing wheel events mid-scroll.
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
+   Keep this file free of Lenis rules; upgrade the package instead. */
 
 /* ---- reduced motion: kill the theatrics ---- */
 @media (prefers-reduced-motion: reduce) {
