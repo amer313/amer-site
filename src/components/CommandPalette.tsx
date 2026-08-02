@@ -383,7 +383,14 @@ export default function CommandPalette() {
                 )}
               </div>
 
-              <div ref={listRef} className="max-h-[52vh] overflow-y-auto py-2">
+              {/* data-lenis-prevent or this list never scrolls: Lenis binds a
+                  non-passive wheel/touch listener on window and preventDefaults
+                  every gesture, so nested overflow containers get nothing. */}
+              <div
+                ref={listRef}
+                data-lenis-prevent
+                className="max-h-[52vh] overflow-y-auto overscroll-contain py-2"
+              >
                 {flat.length === 0 && (
                   <p className="px-5 py-6 font-mono text-sm text-dim">
                     No matches. Try &quot;email&quot; or &quot;github&quot;.
