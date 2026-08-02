@@ -9,6 +9,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 
 type Command = {
   id: string;
@@ -186,6 +187,7 @@ export default function CommandPalette() {
   const [matrix, setMatrix] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -256,6 +258,19 @@ export default function CommandPalette() {
     const raf = requestAnimationFrame(() => inputRef.current?.focus());
     return () => cancelAnimationFrame(raf);
   }, [isOpen]);
+
+  // Body scroll lock. Without it a gesture on the backdrop — anywhere outside
+  // the results list — still reaches Lenis and scrolls the page behind the open
+  // modal. stop() also adds `lenis-stopped` to <html>, which globals.css turns
+  // into `overflow: hidden` for the no-JS-scroll case. The list keeps scrolling
+  // because Lenis checks data-lenis-prevent *before* isStopped (lenis.mjs:607
+  // vs :611), so the early return wins over the preventDefault.
+  const overlayOpen = isOpen || matrix;
+  useEffect(() => {
+    if (!lenis || !overlayOpen) return;
+    lenis.stop();
+    return () => lenis.start();
+  }, [lenis, overlayOpen]);
 
   const ctx: Ctx = { close, toast, setMatrix };
 
