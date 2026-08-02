@@ -3,10 +3,13 @@
 import { ReactLenis } from "lenis/react";
 
 /**
- * Lenis options. Hoisted to module scope because ReactLenis re-creates the
- * instance whenever `JSON.stringify(options)` changes — an inline object would
- * be a fresh literal every render. (`easing` is dropped by stringify, so it
- * doesn't affect the identity either way.)
+ * Lenis options, at module scope so there's one stable object rather than a new
+ * allocation per render. ReactLenis keys instance re-creation on
+ * `JSON.stringify(options)`, so an inline literal with these same values would
+ * NOT churn the instance — the stringified key is identical either way. Note
+ * `easing` is a function and vanishes under stringify, meaning a change to it
+ * alone would not be picked up; it still reaches the real instance because the
+ * whole object is spread into `new Lenis()`.
  */
 const OPTIONS = {
   duration: 1.2,
